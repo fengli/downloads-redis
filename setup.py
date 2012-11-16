@@ -5,10 +5,10 @@ long_description = open('README.rst').read()
 
 setup(
     name='downloads',
-    version=downloads.VERSION,
+    version=main.VERSION,
     packages=['downloads', 
               ],
-    description='Redis based most downloads in a certain period of time..',
+    description='show top downloads in a certain period of time in redis',
     long_description=long_description,
     author='Feng Li',
     author_email='okidogii@gmail.com',

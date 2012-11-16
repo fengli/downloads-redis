@@ -13,6 +13,8 @@ try:
 except:
     pass
 
+VERSION='1.0'
+
 class Download (object):
     def __init__ (self, modelname='item', redisaddr="localhost", db=5, cache=True):
         self.r = redis.StrictRedis (redisaddr, db=db)
