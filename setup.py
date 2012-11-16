@@ -1,11 +1,11 @@
 from distutils.core import setup
-import autocomplete
+import downloads
 
 long_description = open('README.rst').read()
 
 setup(
     name='downloads',
-    version=main.VERSION,
+    version=downloads.VERSION,
     packages=['downloads', 
               ],
     description='show top downloads in a certain period of time in redis',
