@@ -36,12 +36,32 @@ class Download (object):
         items = self.r.zrevrange (self.all_time_period_key(), 0, n-1, withscores=True)
         return items
 
-    def most_downloads_in_one_week (self):
-        return self.most_downloads_in_date_range (today (), ndays_later (7))
+    def most_downloads_in_past_week (self):
+        return self.most_downloads_in_date_range (ndays_later(-6), ndays_later (1))
 
-    def most_downloads_in_one_month (self):
-        return self.most_downloads_in_date_range (today (), ndays_later (30))
+    def most_downloads_in_past_month (self):
+        return self.most_downloads_in_date_range (ndays_later(-30), ndays_later (1))
 
+    def most_downloads_in_past_week_complex (self):
+        downloads = self.most_downloads_in_date_range (ndays_later(-6), ndays_later (1))
+        pks = zip (*downloads)[0]
+        history_7_days = [self.recent_history_in_past_week (pk) for pk in pks]
+        return zip (zip(*downloads)[0], zip(*downloads)[1], history_7_days)
+    
+    def most_downloads_in_past_month_complex (self):
+        downloads = self.most_downloads_in_date_range (ndays_later(-30), ndays_later (1))
+        pks = zip (*downloads)[0]
+        history_7_days = [self.recent_history_in_past_week (pk) for pk in pks]
+        return zip (zip(*downloads)[0], zip(*downloads)[1], history_7_days)
+
+    def recent_history_in_past_week (self, pk):
+        return self.recent_history_in_time_period (pk, ndays_later (-6), ndays_later (1))
+
+    def recent_history_in_time_period (self, pk, start, end):
+        dates = date_range (start, end)
+        dates = [date.strftime ("%Y-%m-%d") for date in dates]
+        return zip (dates, self.r.hmget (self.history_key (pk), dates))
+    
     def most_downloads_in_date_range (self, start, end, n=50):
         date_range_k = self.date_range_key (start, end)
         if self.cache and self.r.exists (date_range_k):
@@ -50,7 +70,7 @@ class Download (object):
         datekeys = map (self.date_key, dates)
         self.r.zunionstore (date_range_k, datekeys)
         return self.r.zrevrange (date_range_k, 0, n-1, withscores=True)
-        
+    
     def item_key (self, pk):
         return '%s:downloads:item:%s'% (self.modelname, pk)
 
@@ -68,7 +88,7 @@ class Download (object):
 
     def all_time_period_key (self):
         return '%s:downloads:all'%self.modelname
-    
+
     def _incr (self, pk, date):
         self.r.incr (self.item_key (pk))
         if not self.r.exists (self.date_key (date)):
