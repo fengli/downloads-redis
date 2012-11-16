@@ -1,1 +1,1 @@
-from main import Download
+from main import *

@@ -69,7 +69,11 @@ class Download (object):
     
     def _incr (self, pk, date):
         self.r.incr (self.item_key (pk))
-        self.r.zincrby (self.date_key (date), pk, 1)
+        if not self.r.exists (self.date_key (date)):
+            self.r.zincrby (self.date_key (date), pk, 1)            
+            self.r.expire (self.date_key (date), 31*24*60*60)
+        else:
+            self.r.zincrby (self.date_key (date), pk, 1)            
         self.r.zincrby (self.all_time_period_key (), pk, 1)
         self.r.hincrby (self.history_key (pk), date.strftime ("%Y-%m-%d"), 1)
 
