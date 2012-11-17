@@ -36,11 +36,11 @@ class Download (object):
         items = self.r.zrevrange (self.all_time_period_key(), 0, n-1, withscores=True)
         return items
 
-    def most_downloads_in_past_week (self):
-        return self.most_downloads_in_date_range (ndays_later(-6), ndays_later (1))
+    def most_downloads_in_past_week (self, n=50):
+        return self.most_downloads_in_date_range (ndays_later(-6), ndays_later (1), n)
 
-    def most_downloads_in_past_month (self):
-        return self.most_downloads_in_date_range (ndays_later(-30), ndays_later (1))
+    def most_downloads_in_past_month (self, n=50):
+        return self.most_downloads_in_date_range (ndays_later(-30), ndays_later (1), n)
 
     def most_downloads_in_past_week_complex (self):
         downloads = self.most_downloads_in_date_range (ndays_later(-6), ndays_later (1))
