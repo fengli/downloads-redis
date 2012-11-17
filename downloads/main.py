@@ -69,6 +69,7 @@ class Download (object):
         dates = date_range (start, end)
         datekeys = map (self.date_key, dates)
         self.r.zunionstore (date_range_k, datekeys)
+        self.r.expire (date_range_k, 5*60)
         return self.r.zrevrange (date_range_k, 0, n-1, withscores=True)
     
     def item_key (self, pk):
