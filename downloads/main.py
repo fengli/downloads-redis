@@ -42,14 +42,14 @@ class Download (object):
     def most_downloads_in_past_month (self, n=50):
         return self.most_downloads_in_date_range (ndays_later(-30), ndays_later (1), n)
 
-    def most_downloads_in_past_week_complex (self):
-        downloads = self.most_downloads_in_date_range (ndays_later(-6), ndays_later (1))
+    def most_downloads_in_past_week_complex (self, n=50):
+        downloads = self.most_downloads_in_date_range (ndays_later(-6), ndays_later (1), n)
         pks = zip (*downloads)[0]
         history_7_days = [self.recent_history_in_past_week (pk) for pk in pks]
         return zip (zip(*downloads)[0], zip(*downloads)[1], history_7_days)
     
-    def most_downloads_in_past_month_complex (self):
-        downloads = self.most_downloads_in_date_range (ndays_later(-30), ndays_later (1))
+    def most_downloads_in_past_month_complex (self, n=50):
+        downloads = self.most_downloads_in_date_range (ndays_later(-30), ndays_later (1), n)
         pks = zip (*downloads)[0]
         history_7_days = [self.recent_history_in_past_week (pk) for pk in pks]
         return zip (zip(*downloads)[0], zip(*downloads)[1], history_7_days)

@@ -3,6 +3,7 @@
 from main import *
 import os
 import unittest
+from datetime import datetime
 
 class testDownload (unittest.TestCase):
     def setUp (self):
@@ -39,27 +40,30 @@ class testDownload (unittest.TestCase):
 
     def test_most_downloads_in_past_week_complex (self):
         downloads = self.d.most_downloads_in_past_week_complex ()
-        self.assertEqual (downloads,   [('2',6.0,[('2012-11-11', None),
-                                                  ('2012-11-12', '5'),
-                                                  ('2012-11-13', None),
-                                                  ('2012-11-14', None),
-                                                  ('2012-11-15', None),
-                                                  ('2012-11-16', None),
-                                                  ('2012-11-17', '1')]),
-                                        ('1',3.0,[('2012-11-11', None), 
-                                                  ('2012-11-12', None), 
-                                                  ('2012-11-13', None), 
-                                                  ('2012-11-14', None), 
-                                                  ('2012-11-15', None), 
-                                                  ('2012-11-16', None), 
-                                                  ('2012-11-17', '3')]),
-                                        ('3', 1.0,[('2012-11-11', None),
-                                                   ('2012-11-12', None),
-                                                   ('2012-11-13', None),
-                                                   ('2012-11-14', None),
-                                                   ('2012-11-15', None),
-                                                   ('2012-11-16', None),
-                                                   ('2012-11-17', '1')])])
+        self.assertEqual (downloads[0][2][1][1], '5')
+        self.assertEqual (downloads[1][2][6][1], '3')
+        self.assertEqual (downloads[2][2][6][1], '1')
+        # self.assertEqual (downloads,   [('2',6.0,[('2012-11-11', None),
+        #                                           ('2012-11-12', '5'),
+        #                                           ('2012-11-13', None),
+        #                                           ('2012-11-14', None),
+        #                                           ('2012-11-15', None),
+        #                                           ('2012-11-16', None),
+        #                                           ('2012-11-17', '1')]),
+        #                                 ('1',3.0,[('2012-11-11', None), 
+        #                                           ('2012-11-12', None), 
+        #                                           ('2012-11-13', None), 
+        #                                           ('2012-11-14', None), 
+        #                                           ('2012-11-15', None), 
+        #                                           ('2012-11-16', None), 
+        #                                           ('2012-11-17', '3')]),
+        #                                 ('3', 1.0,[('2012-11-11', None),
+        #                                            ('2012-11-12', None),
+        #                                            ('2012-11-13', None),
+        #                                            ('2012-11-14', None),
+        #                                            ('2012-11-15', None),
+        #                                            ('2012-11-16', None),
+        #                                            ('2012-11-17', '1')])])
 
     def test_most_downloads_in_date_range (self):
         downloads = self.d.most_downloads_in_date_range (ndays_later (-6), ndays_later (-2))
@@ -67,5 +71,14 @@ class testDownload (unittest.TestCase):
 
     def test_recent_history_in_time_period (self):
         downloads = self.d.recent_history_in_past_week ('2')
-        self.assertEqual (downloads, [('2012-11-11', None),('2012-11-12', '5'),('2012-11-13', None),('2012-11-14', None),('2012-11-15', None),('2012-11-16', None),('2012-11-17', '1')])
+        self.assertEqual (downloads[1][1],'5')
+        self.assertEqual (downloads[6][1],'1')
+        # self.assertEqual (downloads,
+        #                   [('2012-11-11', None),
+        #                   ('2012-11-12', '5'),
+        #                   ('2012-11-13', None),
+        #                   ('2012-11-14', None),
+        #                   ('2012-11-15', None),
+        #                   ('2012-11-16', None),
+        #                   ('2012-11-17', '1')])
 
