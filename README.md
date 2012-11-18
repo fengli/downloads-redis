@@ -32,9 +32,12 @@ md.incr ('item2')  #increase the download count for 'item2'
 md.incr ('item2')  #increase the download count for 'item2'
 
 #get the top 50 most downloads today
-items = md.most_downloads_tody (50)
+items = md.most_downloads_today (50)
 print items
 [('item2',2.0), ('item1', 1.0)]
+
+items = md.most_downloads_in_past_week (100)
+items = md.most_downloads_all_time (50)
 ```
 就是这么简单!
 
