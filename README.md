@@ -2,6 +2,7 @@ downloads-redis
 ===============
 
 使用redis存储并且获取站点资源下载数量在一段时间内 (每天/周/月) 的统计数据。
+
 show top downloads in a certain period of time in redis
 
 安装
