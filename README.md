@@ -39,38 +39,41 @@ print items
 
 
 详细的接口描述：
+------------
 
 * def most_downloads_today (self, n=50)
 
-返回今天top n的下载, default n=50
+   返回今天top n的下载, default n=50
 
 * def most_downloads_all_time (self, n=50):
 
-返回所有时间内的top n下载, default n=50
+   返回所有时间内的top n下载, default n=50
 
 * def most_downloads_in_past_week (self, n=50):
 
-返回最近7天内的top n下载, default n=50
+   返回最近7天内的top n下载, default n=50
 
 * def most_downloads_in_past_month (self, n=50):
-返回最近31天内的top n下载，default n=50
+   返回最近31天内的top n下载，default n=50
 
 * def most_downloads_in_past_week_complex (self, n=50):
 
-返回最近7天内的top n下载，并且返回top n下载最近7天内每天的下载量
+   返回最近7天内的top n下载，并且返回top n下载最近7天内每天的下载量
 
 * def most_downloads_in_past_month_complex (self, n=50):
 
-返回最近30天内top n下载，并且返回top n下载最近7天内每天的下载量
+   返回最近30天内top n下载，并且返回top n下载最近7天内每天的下载量
 
 * def delete_all_keys (self):
-删除redis中所有的跟downloads关联的key.
+   删除redis中所有的跟downloads关联的key.
 
 * Download class
+
 ```python
 def __init__ (self, modelname='item', redisaddr="localhost", db=5, cache=True):
 
 ```
+
 - modelname 使得你可以使用downloads模块跟踪多个不同类型的下载量
 - cache 是否cache最近7天/30天的统计数据 (5分钟后expire), default=True
 
