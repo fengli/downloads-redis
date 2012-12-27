@@ -5,18 +5,6 @@ from pytz import timezone
 
 import redis
 
-try: 
-    import simplejson
-except: 
-    from django.utils import simplejson
-
-try:
-    from django.core import serializers
-    from django.db.models.loading import get_model
-except:
-    pass
-
-VERSION='1.0'
 
 class Download (object):
     def __init__ (self, modelname='item', redisaddr="localhost", db=5, cache=True):
