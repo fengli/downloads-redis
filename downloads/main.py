@@ -1,11 +1,14 @@
-from datetime import timedelta
-from datetime import datetime
+from datetime import timedelta, datetime
+
 import pytz
 from pytz import timezone
+
 import redis
 
-try: import simplejson
-except: from django.utils import simplejson
+try: 
+    import simplejson
+except: 
+    from django.utils import simplejson
 
 try:
     from django.core import serializers
