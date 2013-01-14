@@ -1,11 +1,11 @@
 from distutils.core import setup
-import downloads
+VERSION='1.0'
 
 long_description = open('README.rst').read()
 
 setup(
     name='downloads',
-    version=downloads.VERSION,
+    version=VERSION,
     packages=['downloads', 
               ],
     description='show top downloads in a certain period of time in redis',
