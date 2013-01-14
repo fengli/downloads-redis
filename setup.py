@@ -1,7 +1,7 @@
 from distutils.core import setup
 VERSION='1.0'
 
-long_description = open('README.rst').read()
+long_description = open('README.md').read()
 
 setup(
     name='downloads',
